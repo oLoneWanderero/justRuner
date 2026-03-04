@@ -11,6 +11,9 @@ private:
     int score;
     bool isRunning;
     bool SpacePressed;
+    bool quitToMenu;
+    int frameDelay;
+    int scoreMultiplier;
 
     void gameLoop();
     void processInput();
@@ -18,6 +21,7 @@ private:
     void render();
 
 public:
-    Game();
+    Game(int difficulty,string playerName);
     void run();
+    bool isQuitToMenu(){return quitToMenu;}
 };

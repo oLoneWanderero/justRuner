@@ -1,4 +1,6 @@
 #pragma once
+#include <string>
+using namespace std;
 class Player
 {
 private:
@@ -8,6 +10,7 @@ private:
     bool isJumping;
     int jumpCounter;
     int maxJump;
+    string name;
 
 public:
     Player();
@@ -16,4 +19,6 @@ public:
     int getX();
     int getY();
     void reset();
+    void setName(string newName);
+    string getName();
 };

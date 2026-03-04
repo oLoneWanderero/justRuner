@@ -44,3 +44,7 @@ bool ObstacleManager::checkCollision(int playerX,int playerY){
     }
     return false;
 }
+void ObstacleManager::setSpawnRate(int rate)
+{
+    spawnRate = rate;
+}

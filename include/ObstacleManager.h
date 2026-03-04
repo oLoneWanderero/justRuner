@@ -16,4 +16,5 @@ public:
     void update();
     vector<Obstacle> &getObstacles();
     bool checkCollision(int plaerX, int playerY);
+    void setSpawnRate(int rate);
 };

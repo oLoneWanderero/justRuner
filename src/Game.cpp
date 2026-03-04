@@ -6,9 +6,32 @@
 #include "Game.h"
 using namespace std;
 
-Game::Game() : obstacleManager{30, 3}, score{0}, isRunning{true}, SpacePressed{false}
+Game::Game(int diff,string playerName) : obstacleManager{30, 5}, score{0}, isRunning{true}, SpacePressed{false}, quitToMenu{false}
 {
     setNonBlocking(true);
+    player.setName(playerName);
+    switch (diff)
+    {
+    case 1:
+        obstacleManager.setSpawnRate(8);
+        frameDelay = 250;
+        scoreMultiplier = 1;
+        break;
+    case 2:
+        obstacleManager.setSpawnRate(5);
+        frameDelay = 200;
+        scoreMultiplier = 2;
+        break;
+    case 3:
+        obstacleManager.setSpawnRate(3);
+        frameDelay = 150;
+        scoreMultiplier = 3;
+        break;
+    default:
+        obstacleManager.setSpawnRate(5);
+        frameDelay = 200;
+        scoreMultiplier = 2;
+    }
 }
 
 void Game::run()
@@ -24,7 +47,7 @@ void Game::gameLoop()
         processInput();
         update();
         render();
-        this_thread::sleep_for(chrono::milliseconds(200));
+        this_thread::sleep_for(chrono::milliseconds(frameDelay));
     }
 }
 void Game::processInput()
@@ -35,9 +58,11 @@ void Game::processInput()
 
         if (c == 'q')
         {
+            quitToMenu = true;
             isRunning = false;
+            return;
         }
-        else if (c == ' '  && player.getY() == 0)
+        else if (c == ' ' && player.getY() == 0)
         {
             player.jump();
         }
@@ -56,7 +81,7 @@ void Game::update()
     {
         isRunning = false;
     }
-    score++;
+    score+=scoreMultiplier;
 }
 void Game::render()
 {
@@ -66,4 +91,5 @@ void Game::render()
     field.drawObstacles(obstacleManager.getObstacles());
     field.render();
     cout << "Score: " << score << endl;
+    cout<<"Player: "<<player.getName()<<endl;
 }
