@@ -4,9 +4,10 @@
 #include <cstdlib>
 #include "Input.h"
 #include "Game.h"
+#include "ScoreManager.h"
 using namespace std;
 
-Game::Game(int diff,string playerName) : obstacleManager{30, 5}, score{0}, isRunning{true}, SpacePressed{false}, quitToMenu{false}
+Game::Game(int diff, string playerName) : obstacleManager{30, 5}, score{0}, isRunning{true}, SpacePressed{false}, quitToMenu{false}
 {
     setNonBlocking(true);
     player.setName(playerName);
@@ -38,6 +39,9 @@ void Game::run()
 {
     gameLoop();
     setNonBlocking(false);
+    int totalPoints = score;
+    ScoreManager sm("data/scores.csv");
+    sm.addScore(player.getName(), totalPoints);
 }
 
 void Game::gameLoop()
@@ -81,7 +85,7 @@ void Game::update()
     {
         isRunning = false;
     }
-    score+=scoreMultiplier;
+    score += scoreMultiplier;
 }
 void Game::render()
 {
@@ -91,5 +95,5 @@ void Game::render()
     field.drawObstacles(obstacleManager.getObstacles());
     field.render();
     cout << "Score: " << score << endl;
-    cout<<"Player: "<<player.getName()<<endl;
+    cout << "Player: " << player.getName() << endl;
 }

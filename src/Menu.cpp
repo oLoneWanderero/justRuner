@@ -1,4 +1,5 @@
 #include "Menu.h"
+#include "ScoreManager.h"
 #include <iostream>
 using namespace std;
 
@@ -68,8 +69,13 @@ void Menu::show()
             }
             break;
         case 4:
-            cout << "High Score: (TODO)" << endl;
+        {
+            ScoreManager score("data/scores.csv");
+            score.printTop(10);
+            cin.ignore();
+            cin.get();
             break;
+        }
         case 5:
             exitMenu = true;
             difficulty = -1;
@@ -80,4 +86,4 @@ void Menu::show()
 
 int Menu::getDifficulty() { return difficulty; }
 bool Menu::shouldExit() { return difficulty == -1; }
-string Menu::getPlayerName(){return playerName;}
+string Menu::getPlayerName() { return playerName; }
