@@ -7,10 +7,11 @@ class Game
 private:
     Player player;
     Field field;
-    bool isRunning;
     ObstacleManager obstacleManager;
     int score;
-    
+    bool isRunning;
+    bool wasSpacePressed;
+
     void gameLoop();
     void processInput();
     void update();

@@ -18,3 +18,5 @@ build/%.o: src/%.cpp
 
 clean:
 	rm -rf build
+run:
+	build/game
