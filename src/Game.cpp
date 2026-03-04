@@ -6,7 +6,7 @@
 #include "Game.h"
 using namespace std;
 
-Game::Game() : obstacleManager{30, 3}, score{0}, isRunning{true}, wasSpacePressed{false}
+Game::Game() : obstacleManager{30, 3}, score{0}, isRunning{true}, SpacePressed{false}
 {
     setNonBlocking(true);
 }
@@ -37,13 +37,11 @@ void Game::processInput()
         {
             isRunning = false;
         }
-        else if ((c == ' ' || c == 'w') && player.getY() == 0)
+        else if (c == ' '  && player.getY() == 0)
         {
-            // Прыжок только с земли
             player.jump();
         }
 
-        // Очистка оставшихся символов из буфера
         int extra;
         while (kbhit() && (extra = getchar()) != EOF)
         {

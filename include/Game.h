@@ -10,7 +10,7 @@ private:
     ObstacleManager obstacleManager;
     int score;
     bool isRunning;
-    bool wasSpacePressed;
+    bool SpacePressed;
 
     void gameLoop();
     void processInput();
