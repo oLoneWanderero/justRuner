@@ -1,21 +1,17 @@
 #pragma once
 #include <string>
+#include <unordered_map>
 #include <vector>
+#include <Score.h>
 using namespace std;
 
-struct ScoreEntry
-{
-    string name;
-    int score;
-};
 
 class ScoreManager{
     private:
     string filename;
-    vector<ScoreEntry> scores;
+    unordered_map<string,Score> scores;
     void load();
     void save();
-    void sortScores();
     public:
     ScoreManager(string file);
     void addScore(string name,int score);
